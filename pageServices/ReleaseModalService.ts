@@ -11,7 +11,7 @@ export class ReleaseModalService{
       }
 
       async closeReleaseModal(){
-        this.releaseModal.closeReleaseModal.click();
+        await this.releaseModal.closeReleaseModal.click();
       }
     
 }
