@@ -1,14 +1,18 @@
 import { Page } from '@playwright/test';
 
 export class LoginService {
+  private readonly baseURL: string = 'https://qa.vyaguta.lftechnology.com.np';
+  
   constructor(private page: Page) {}
 
   async loginWithToken(token: string) {
+    const domain = new URL(this.baseURL).hostname;
+
     await this.page.context().addCookies([
       {
         name: 'accessToken',
         value: token,
-        domain: 'qa.vyaguta.lftechnology.com.np',
+        domain: domain,
         path: '/',
         httpOnly: false,
         secure: true,
@@ -16,7 +20,7 @@ export class LoginService {
       },
     ]);
 
-    await this.page.goto('https://qa.vyaguta.lftechnology.com.np', {
+    await this.page.goto(this.baseURL, {
       waitUntil: 'load',
     });
   }
