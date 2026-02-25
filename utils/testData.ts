@@ -24,3 +24,17 @@ export const invalidEventData = {
   link: 'https://example.com',
 //   eventDate: '2025-07-05',
 };
+
+export const validWorklogData = {
+  project: 'Project A',
+  task: 'Task 1',
+  details: 'Worked on task 1',
+  time: '8h 0m',
+};
+
+export const invalidWorklogData = {
+  project: '', // Project is required — this should trigger validation
+  task: 'Task 1',
+  details: 'Worked on task 1',
+  time: '8h 0m',
+};

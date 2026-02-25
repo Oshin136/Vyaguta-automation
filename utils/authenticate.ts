@@ -19,6 +19,7 @@ export async function fetchTokens(
   });
 
   if (!response.ok()) throw new Error(`Failed to fetch token: ${response.status()}`);
+  
   const json = await response.json();
   return {
     accessToken: json.data.accessToken,
