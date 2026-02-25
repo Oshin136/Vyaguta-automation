@@ -38,3 +38,16 @@ export const invalidWorklogData = {
   details: 'Worked on task 1',
   time: '8h 0m',
 };
+
+export const validReminderData = {
+  title: 'Automation Test Reminder',
+  description: 'This is a test reminder created by Playwright.',
+  link: 'https://example.com',
+//   eventDate: '2025-07-05',
+};
+
+export const invalidReminderData = {
+  title: '', // Title is required — this should trigger validation
+  description: 'Missing title field',
+  link: 'https://example.com',
+};
