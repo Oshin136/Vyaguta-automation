@@ -1,4 +1,3 @@
-
 export const validEventData = {
   title: 'Automation Test Event',
   description: 'This is a test event created by Playwright.',
@@ -51,3 +50,14 @@ export const invalidReminderData = {
   description: 'Missing title field',
   link: 'https://example.com',
 };
+
+export const validHolidayData = {
+  title: 'Automation Test Holiday',
+  description: 'This is a test holiday created by Playwright.',
+};
+
+export const invalidHolidayData = {
+  title: '', // Title is required — this should trigger validation
+  description: 'Missing title field',
+};
+
