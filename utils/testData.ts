@@ -1,3 +1,6 @@
+import { departments, workingTypes, genders, bloodGroups, maritalStatuses, countries, timezones, employmentStatuses,designations,areas } from './constants';
+import { faker } from '@faker-js/faker';
+
 export const validEventData = {
   title: 'Automation Test Event',
   description: 'This is a test event created by Playwright.',
@@ -60,4 +63,52 @@ export const invalidHolidayData = {
   title: '', // Title is required — this should trigger validation
   description: 'Missing title field',
 };
+
+export function generateLeapfroggerData() {
+  const firstName = faker.person.firstName().replace(/[^a-zA-Z]/g, "");
+  const middleName = faker.person.middleName().replace(/[^a-zA-Z]/g, "");
+  const lastName = faker.person.lastName().replace(/[^a-zA-Z]/g, "");
+
+  const officialInfo = {
+    firstName,
+    middleName,
+    lastName,
+    joinDate: faker.date.past({ years: 2 }).toISOString().split('T')[0],
+    recruiteeUrl: faker.internet.url(),
+    employeeEmail: `${firstName}${lastName}@test.com`.toLowerCase(),
+    previousExperienceYear: faker.number.int({ min: 0, max: 20 }).toString(),
+    previousExperienceMonth: faker.number.int({ min: 0, max: 11 }).toString(),
+    cvUrl: faker.internet.url(),
+    workingType: faker.helpers.arrayElement(workingTypes),
+    department: faker.helpers.arrayElement(departments),
+  };
+
+  const personalInfo = {
+    gender: faker.helpers.arrayElement(genders),
+    dateOfBirth: faker.date.birthdate({ min: 1970, max: 2000, mode: 'year' }).toISOString().split('T')[0],
+    bloodGroup: faker.helpers.arrayElement(bloodGroups),
+    maritalStatus: faker.helpers.arrayElement(maritalStatuses),
+    personalEmail: faker.internet.email(),
+    phoneNumber: faker.string.numeric(10),
+    alternatePhoneNumber: faker.string.numeric(10),
+    emergencyContactNumber: faker.string.numeric(10),
+    relationWithEmergencyContact: faker.person.firstName(),
+    temporaryAddress: faker.location.streetAddress(),
+    permanentAddress: faker.location.streetAddress(),
+    country: faker.helpers.arrayElement(countries),
+    timezone: faker.helpers.arrayElement(timezones),
+    githubId: `${firstName}${lastName}test`.toLowerCase(),
+  };
+
+  const historyInfo = {
+    employmentStatus: faker.helpers.arrayElement(employmentStatuses),
+    employmentStatusStartDate: officialInfo.joinDate,
+    designation: faker.helpers.arrayElement(designations),
+    area: faker.helpers.arrayElement(areas),
+    transitionDate: officialInfo.joinDate,
+
+  };
+
+  return { officialInfo, personalInfo, historyInfo };
+}
 

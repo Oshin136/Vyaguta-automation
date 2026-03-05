@@ -23,9 +23,8 @@ test.beforeEach(async ({ page }) => {
 test('Should create an event with valid data @positiveCase',async({page}) => {
     const event = new EventService(page);
     await event.createEvent(validEventData);
-    const isVerified = await event.verifyEventCreated(validEventData.title);
-    expect(isVerified).toBeTruthy();
-})
+    expect(await event.verifyEventCreated()).toBeTruthy();
+});
 
 test('Should update the created event @positiveCase',async({page}) => {
   const event = new EventService(page);
@@ -38,8 +37,7 @@ test('Should update the created event @positiveCase',async({page}) => {
     link: 'https://updated-event-link.com'
   };
   await event.updateEvent(updatedEventData);
-  const isVerified = await event.verifyEventUpdated();
-  expect(isVerified).toBeTruthy();
+  expect(await event.verifyEventUpdated()).toBeTruthy();
 })
 
 test('Should delete the created event @positiveCase',async({page}) => {
@@ -48,8 +46,7 @@ test('Should delete the created event @positiveCase',async({page}) => {
   await event.createEvent(validEventData);
   
   await event.deleteEvent();
-  const isVerified = await event.verifyEventDeleted();
-  expect(isVerified).toBeTruthy();
+  expect(await event.verifyEventDeleted()).toBeTruthy();
 })
 
 test('Regression: Should create, update and delete an event @regression', async({page}) => {
@@ -59,8 +56,8 @@ test('Regression: Should create, update and delete an event @regression', async(
   
   // Create event
   await event.createEvent(validEventData);
-  const isCreated = await event.verifyEventCreated(validEventData.title);
-  expect(isCreated).toBeTruthy();
+  expect(await event.verifyEventCreated()).toBeTruthy();
+
   
   // Update event
   const updatedEventData = {
@@ -69,20 +66,17 @@ test('Regression: Should create, update and delete an event @regression', async(
     link: 'https://regression-updated-event.com'
   };
   await event.updateEvent(updatedEventData);
-  const isUpdated = await event.verifyEventUpdated();
-  expect(isUpdated).toBeTruthy();
+  expect(await event.verifyEventUpdated()).toBeTruthy();
   
   // Delete event
   await event.deleteEvent();
-  const isDeleted = await event.verifyEventDeleted();
-  expect(isDeleted).toBeTruthy();
+  expect(await event.verifyEventDeleted()).toBeTruthy();
 })
 
 test('Should not create an event with invalid data @negativeCase',async({page}) => {
   const event = new EventService(page);
   await event.createEvent(invalidEventData);
-  const isVerified = await event.verifyValidationError('Please provide title');
-  expect(isVerified).toBeTruthy();
+  expect(await event.verifyValidationError()).toBeTruthy();
 })  
 
 test('Should filter and display past events @positiveCase',async({page}) => {

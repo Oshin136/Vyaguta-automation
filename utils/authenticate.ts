@@ -2,7 +2,7 @@ import { APIRequestContext } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const BASE_URL = 'https://qa.vyaguta.lftechnology.com.np';
+// const BASE_URL = 'https://uat.vyaguta.lftechnology.com.np';
 
 export async function fetchTokens(
   request: APIRequestContext
@@ -14,7 +14,7 @@ export async function fetchTokens(
     throw new Error('CLIENT_ID or ACCESS_CODE is not defined in .env');
   }
 
-  const response = await request.get(`${BASE_URL}/api/auth/authorize`, {
+  const response = await request.get(`${process.env.BASE_URL}/api/auth/authorize`, {
     params: { clientId, token },
   });
 
