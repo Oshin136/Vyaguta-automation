@@ -1,13 +1,21 @@
 import { Page } from "@playwright/test";
 import { EventPage } from "../pageObjects/EventPage";
+import { eventSuccessMessages } from "../utils/successMessages";
+import { eventValidationMessages } from "../utils/validationMessages";
+import { ToastMessagePage } from "../pageObjects/ToastMessagePage";
+import { FormValidationPage } from "../pageObjects/FormValidationPage";
 
 export class EventService{
   readonly page: Page;
   readonly eventPage : EventPage;
+  readonly toastMessagePage: ToastMessagePage;
+  readonly formValidationPage: FormValidationPage;
 
   constructor(page:Page){
     this.page = page;
     this.eventPage = new EventPage(page);
+    this.toastMessagePage = new ToastMessagePage(page);
+    this.formValidationPage = new FormValidationPage(page);
   }
 
   async navigateToEventPage() {
@@ -54,23 +62,24 @@ export class EventService{
     await this.eventPage.selectAllEvents();
   }
 
-  async verifyEventCreated(title: string): Promise<boolean> {
-    const messageVisible = await this.eventPage.isSuccessMessageVisible('Event created successfully');
-    // const titleVisible = await this.eventPage.isEventDisplayed(title);
+  async verifyEventCreated(): Promise<boolean> {
+    const messageVisible = await (await this.toastMessagePage.getSuccessMessage()).includes(eventSuccessMessages.create);
     return messageVisible;
-    // && titleVisible;
   }
 
   async verifyEventUpdated(): Promise<boolean> {
-    return await this.eventPage.isSuccessMessageVisible('Event updated successfully');
+    const messageVisible = await (await this.toastMessagePage.getSuccessMessage()).includes(eventSuccessMessages.update);
+    return messageVisible;
   }
 
   async verifyEventDeleted(): Promise<boolean> {
-    return await this.eventPage.isSuccessMessageVisible('Event deleted successfully');
+    const messageVisible = await (await this.toastMessagePage.getSuccessMessage()).includes(eventSuccessMessages.delete);
+    return messageVisible;
   }
 
-  async verifyValidationError(message: string): Promise<boolean> {
-    return await this.eventPage.isValidationMessageVisible(message);
+  async verifyValidationError(): Promise<boolean> {
+    const messageVisible = await (await this.formValidationPage.getFirstValidationError()).includes(eventValidationMessages.title);
+    return messageVisible;
   }
 
   async verifyEventsDisplayed(): Promise<boolean> {

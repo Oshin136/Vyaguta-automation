@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 export class LoginService {
-  private readonly baseURL: string = 'https://qa.vyaguta.lftechnology.com.np';
+  private readonly baseURL: string = 'https://uat.vyaguta.lftechnology.com.np';
   
   constructor(private page: Page) {}
 

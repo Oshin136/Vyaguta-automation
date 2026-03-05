@@ -15,8 +15,6 @@ export class EventPage {
   readonly deleteEventButton: Locator;
   readonly pastEvents: Locator;
   readonly allEvents: Locator;
-  readonly successMessage: Locator;
-  readonly validationMessage: Locator;
   readonly eventTitle: (title: string) => Locator;
 
   constructor(page: Page) {
@@ -38,8 +36,6 @@ export class EventPage {
     this.deleteEventButton = page.getByText('Delete event').first();
     this.pastEvents = page.getByRole("button", { name: "Past" });
     this.allEvents = page.getByRole("button", { name: "All" });
-    this.successMessage = page.locator('.toast-message, .success-message, [class*="success"]');
-    this.validationMessage = page.locator('.error-message, .validation-message, [class*="error"]');
     this.eventTitle = (title: string) => page.getByText(title).first();
   }
 
@@ -101,21 +97,6 @@ export class EventPage {
 
   async selectAllEvents() {
     await this.allEvents.click();
-  }
-
-  async isSuccessMessageVisible(message: string): Promise<boolean> {
-    try {
-      const messageLocator = this.page.getByText(message);
-      await messageLocator.waitFor({ state: 'visible', timeout: 5000 });
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  async isValidationMessageVisible(message: string): Promise<boolean> {
-    const messageLocator = this.page.getByText(message, { exact: true });
-    return await messageLocator.isVisible();
   }
 
   async isEventDisplayed(title: string): Promise<boolean> {
