@@ -9,6 +9,7 @@ export class EventPage {
   readonly titleInput: Locator;
   readonly descriptionInput: Locator;
   readonly linkInput: Locator;
+  readonly eventDateInput: Locator;
   readonly saveButton: Locator;
   readonly firstEvent: Locator;
   readonly editEventButton: Locator;
@@ -28,8 +29,10 @@ export class EventPage {
     this.eventTab = page.locator('a[href="/events-notices/events"]'); //used specific due to multiple result for link Events
     this.addButton = page.getByRole("link", { name: "Add Event" });
     this.titleInput = page.locator('input[name="name"]'); //get by role, label didn't work
+
     this.descriptionInput = page.locator("textarea").first();
     this.linkInput = page.locator('input[name="link"]');
+    this.eventDateInput = page.getByRole('textbox', { name: 'Select Date' });;
     this.saveButton = page.getByRole("button", { name: "Save" });
     this.firstEvent = page.locator('span.verticle-ellipse.cursor-pointer').first();
     this.editEventButton = page.locator('li.overflow-menu__item >> text=Edit event');
@@ -47,15 +50,24 @@ export class EventPage {
     title,
     description,
     link,
+    date
   }: {
     title: string;
     description: string;
     link: string;
+    date: string;
+
   }) {
     
     await this.titleInput.fill(title);
+    await this.eventDateInput.click();
+    await this.page.keyboard.press('Control+A');
+    // await this.page.keyboard.press('Backspace');
+    await this.eventDateInput.pressSequentially(date, { delay: 50 });
     await this.descriptionInput.fill(description);
     await this.linkInput.fill(link);
+   
+
   }
 
   async saveEvent() {

@@ -3,9 +3,8 @@ export const eventValidationMessages = {
 };
 
 
-
 export const leapfroggerValidationMessages = {
-  firstName: "Please provide first name",
+  firstName: "Please provide ",
   lastName: "Please provide last name",
   email: "Please provide email address",
   department: "Please provide department",
@@ -25,5 +24,11 @@ export const leapfroggerValidationMessages = {
   permanentAddress: "Please provide permanent address",
   country: "Please provide country",
   timezone: "Please provide timezone",
-  appraiser: "Please provide appraiser"
+  appraiser: "Please provide appraiser",
+  duplicateEmail: "Email already exists",
 };
+
+
+export const linkLibraryValidationMessages = {
+  invalidUrl: "Link is not valid"
+}

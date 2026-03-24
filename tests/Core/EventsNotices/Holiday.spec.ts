@@ -1,9 +1,9 @@
 import { test, expect, request } from '@playwright/test';
-import { fetchTokens } from '../utils/authenticate';
-import { LoginService } from '../pageServices/LoginService';
-import { HolidayService } from '../pageServices/HolidayService';
-import { ReleaseModalService } from '../pageServices/ReleaseModalService';
-import { validHolidayData, invalidHolidayData} from '../utils/testData';
+import { fetchTokens } from '../../../utils/authenticate';
+import { LoginService } from '../../../pageServices/LoginService';
+import { HolidayService } from '../../../pageServices/Core/EventsNotices/HolidayService';
+import { ReleaseModalService } from '../../../pageServices/ReleaseModalService';
+import { validHolidayData, invalidHolidayData} from '../../../utils/testData';
 
 test.beforeEach(async ({ page }) => {
   // Authentication setup

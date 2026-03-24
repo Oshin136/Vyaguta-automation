@@ -1,10 +1,10 @@
 import {test, expect,request} from '@playwright/test';
-import { ApplyAttendanceService } from '../pageServices/Attendance/ApplyAttendanceService';
-import { LoginService } from '../pageServices/LoginService';
-import {fetchTokens} from '../utils/authenticate';
-import { validWorklogData } from '../utils/testData';
-import { ReleaseModalService } from '../pageServices/ReleaseModalService';
-import { FillWorklogService } from '../pageServices/Attendance/FillWorklogService';
+import { ApplyAttendanceService } from '../../pageServices/Attendance/ApplyAttendanceService';
+import { LoginService } from '../../pageServices/LoginService';
+import {fetchTokens} from '../../utils/authenticate';
+import { validWorklogData } from '../../utils/testData';
+import { ReleaseModalService } from '../../pageServices/ReleaseModalService';
+import { FillWorklogService } from '../../pageServices/Attendance/FillWorklogService';
 
 test.beforeEach(async ({ page }) => {
   // Authentication setup

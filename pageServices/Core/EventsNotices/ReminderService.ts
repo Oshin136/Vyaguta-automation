@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { ReminderPage } from "../pageObjects/ReminderPage";
+import { ReminderPage } from "../../../pageObjects/Core/EventsNotices/ReminderPage";
 
 export class ReminderService{
   readonly page: Page;

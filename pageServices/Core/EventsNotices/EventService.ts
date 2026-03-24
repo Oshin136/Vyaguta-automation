@@ -1,9 +1,9 @@
 import { Page } from "@playwright/test";
-import { EventPage } from "../pageObjects/EventPage";
-import { eventSuccessMessages } from "../utils/successMessages";
-import { eventValidationMessages } from "../utils/validationMessages";
-import { ToastMessagePage } from "../pageObjects/ToastMessagePage";
-import { FormValidationPage } from "../pageObjects/FormValidationPage";
+import { EventPage } from "../../../pageObjects/Core/EventsNotices/EventPage";
+import { eventSuccessMessages } from "../../../utils/successMessages";
+import { eventValidationMessages } from "../../../utils/validationMessages";
+import { ToastMessagePage } from "../../../pageObjects/ToastMessagePage";
+import { FormValidationPage } from "../../../pageObjects/FormValidationPage";
 
 export class EventService{
   readonly page: Page;
@@ -28,7 +28,8 @@ export class EventService{
   async createEvent(eventData:{
     title: string,
     description: string,
-    link: string
+    link: string,
+    date: string
   }){
       await this.navigateToEventPage();
       await this.eventPage.clickAddButton();
@@ -39,7 +40,8 @@ export class EventService{
   async updateEvent(eventData:{
     title: string,
     description: string,
-    link: string
+    link: string,
+    date: string
   }){
       await this.navigateToEventPage();
       await this.eventPage.selectFirstEvent();
