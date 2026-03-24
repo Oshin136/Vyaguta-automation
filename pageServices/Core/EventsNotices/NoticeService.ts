@@ -1,5 +1,5 @@
 import {Page} from "@playwright/test";
-import { NoticePage } from "../pageObjects/noticePage";
+import { NoticePage } from "../../../pageObjects/Core/EventsNotices/NoticePage";
 
 export class NoticeService{
   readonly page: Page;

@@ -1,9 +1,10 @@
 import { test,expect, request } from '@playwright/test';
-import { fetchTokens } from '../utils/authenticate';
-import { LoginService } from '../pageServices/LoginService';
-import { EventService } from '../pageServices/EventService';
-import { ReleaseModalService } from '../pageServices/ReleaseModalService';
-import { validEventData,invalidEventData } from '../utils/testData';
+import { fetchTokens } from '../../../utils/authenticate';
+import { LoginService } from '../../../pageServices/LoginService';
+import { EventService } from '../../../pageServices/Core/EventsNotices/EventService';
+import { ReleaseModalService } from '../../../pageServices/ReleaseModalService';
+import { validEventData, invalidEventData, pastEventData, generateTodayDate } from '../../../utils/testData';
+import { log } from 'console';
 
 
 test.beforeEach(async ({ page }) => {
@@ -34,7 +35,8 @@ test('Should update the created event @positiveCase',async({page}) => {
   const updatedEventData = {
     title: 'Updated Event Title',
     description: 'This is an updated description for the event.', 
-    link: 'https://updated-event-link.com'
+    link: 'https://updated-event-link.com',
+    date: generateTodayDate()
   };
   await event.updateEvent(updatedEventData);
   expect(await event.verifyEventUpdated()).toBeTruthy();
@@ -63,7 +65,8 @@ test('Regression: Should create, update and delete an event @regression', async(
   const updatedEventData = {
     title: 'Regression Updated Event',
     description: 'This event was updated during regression testing.', 
-    link: 'https://regression-updated-event.com'
+    link: 'https://regression-updated-event.com',
+    date: generateTodayDate()
   };
   await event.updateEvent(updatedEventData);
   expect(await event.verifyEventUpdated()).toBeTruthy();
@@ -94,5 +97,12 @@ test('Should filter and display all events @positiveCase',async({page}) => {
 });
 
 
+//cannot be tested, once filled past date, the date is automatically changed to current date
+// test('Should not allow to create an event with past date @negativeCase',async({page}) => { 
+//   test.slow()
+//   const event = new EventService(page);
+//   log('Attempting to create an event with past date:', pastEventData);
+//   await event.createEvent(pastEventData);
+// });
 
 

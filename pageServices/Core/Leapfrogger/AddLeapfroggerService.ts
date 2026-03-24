@@ -1,9 +1,9 @@
-import { LeapfroggerPage } from "../pageObjects/LeapfroggerPage";   
+import {LeapfroggerPage } from "../../../pageObjects/Core/Leapfrogger/LeapfroggerPage";
+import { PersonalInfoPage } from "../../../pageObjects/Core/Leapfrogger/PersonalInfoPage";
+import { OfficialInfoPage } from "../../../pageObjects/Core/Leapfrogger/OfficialInfoPage";
+import { HistoryPage } from "../../../pageObjects/Core/Leapfrogger/HistoryPage";
+import { AppraiserPage } from "../../../pageObjects/Core/Leapfrogger/AppraiserPage";
 import { Page } from "@playwright/test";
-import { PersonalInfoPage } from "../pageObjects/PersonalInfoPage";
-import { OfficialInfoPage } from "../pageObjects/OfficialInfoPage";
-import { HistoryPage } from "../pageObjects/HistoryPage";
-import { AppraiserPage } from "../pageObjects/AppraiserPage";
 
 export class AddLeapfroggerService {
     readonly leapfroggerPage: LeapfroggerPage;

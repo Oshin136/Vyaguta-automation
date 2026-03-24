@@ -3,6 +3,7 @@ import {Page, Locator} from "@playwright/test";
 export class PersonalInfoPage {
     readonly page: Page
     // readonly gender: Locator;
+    readonly personalInfoNavigator: Locator;
     readonly dateOfBirth: Locator;
     readonly bloodGroup: Locator;
     readonly maritalStatus: Locator;
@@ -20,6 +21,7 @@ export class PersonalInfoPage {
 
     constructor(page: Page) {
         this.page = page;
+        this.personalInfoNavigator = page.getByText('Personal Information', { exact: true });
         this.dateOfBirth = page.getByRole('textbox', { name: 'Select Date' });
         this.bloodGroup = page.locator('.lf-select__input-container').nth(0);
         this.maritalStatus = page.locator('input[name="maritalStatus"]');
@@ -34,6 +36,10 @@ export class PersonalInfoPage {
         this.timezone = page.locator('.lf-select__input-container').nth(2);
         this.githubId = page.locator('[name="githubId"]');
         this.nextButton = page.getByRole('button', { name: 'Next' });
+    }
+
+    async navigateToPersonalInfo() {
+        await this.personalInfoNavigator.click();
     }
 
     async selectGender(gender: string) {

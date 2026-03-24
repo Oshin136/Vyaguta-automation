@@ -1,9 +1,9 @@
 import { test,expect, request } from '@playwright/test';
-import { fetchTokens } from '../utils/authenticate';
-import { LoginService } from '../pageServices/LoginService';
-import { ReminderService } from '../pageServices/ReminderService';
-import { ReleaseModalService } from '../pageServices/ReleaseModalService';
-import { validReminderData, invalidReminderData } from '../utils/testData';
+import { fetchTokens } from '../../../utils/authenticate';
+import { LoginService } from '../../../pageServices/LoginService';
+import { ReminderService } from '../../../pageServices/Core/EventsNotices/ReminderService';
+import { ReleaseModalService } from '../../../pageServices/ReleaseModalService';
+import { validReminderData, invalidReminderData } from '../../../utils/testData';
 
 
 test.beforeEach(async ({ page }) => {
